@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block css %}
+{% endblock %}
+
+{% block title %} {{ author.name }} {% endblock %}
+
+{% block js %}
+{% endblock %}
+
+{% block content %}
+    <section class="row well" >
+        <div class="page-header pull-center">
+            <h1>{{ author.name }}</h1>
+        </div>
+        <div class="page-content">
+            <table class="table table-bordered table-striped">
+            <tbody>
+            {% for bookRow in bookRows %}
+            <tr>
+                {% for book in bookRow %}
+                <td width="25%">
+                {% if book.name %}
+                <a href="/book/{{ book.id }}/index/" >{{ book.name }}</a>
+                {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </section>
+{% endblock %}
+
+

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block css %}
+{% endblock %}
+
+{% block index-menu %}active{% endblock %}
+
+{% block title %}{% trans 'CVS History' %} - {% endblock %}
+
+{% block js %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="">
+        <table class="table table-bordered">
+            <tr>
+                <th>{% trans 'Update Time' %}</th>
+                <th>{% trans 'Revision' %}</th>
+                <th>{% trans 'Jira' %}</th>
+                <th>{% trans 'File' %}</th>
+                <th>{% trans 'Author' %}</th>
+                <th>{% trans 'Comment' %}</th>
+            </tr>
+    {% for item in latest %}
+            <tr>
+                <td noWrap>{{ item.updatetime|date:"Y-m-d H:i:s" }}</td>
+                <td noWrap>{{ item.revision  }}</td>
+                <td noWrap>{{ item.jira  }}</td>
+                <td noWrap>{{ item.file }}</td>
+                <td noWrap>{{ item.author }}</td>
+                <td noWrap>{{ item.comment|safe  }}</td>
+            </tr>
+    {% endfor %}
+     </table>
+    </div>
+
+    <div class="pagination pull-right">
+        <ul class="pager">
+        {% if blogs.has_previous %}
+        <li>
+            <a class="btn-small" href="/bloglist/{{ blogs.previous_page_number }}/">{% trans 'Previous' %}</a>
+         </li>
+        {% endif %}
+        
+        {% if blogs.has_next %}
+        <li>
+            <a class="btn-small" href="/bloglist/{{ blogs.next_page_number }}/">{% trans 'Next' %}</a>
+        </li>
+        {% endif %}
+        
+        </ul>
+    </div>
+{% endblock %}

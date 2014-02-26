@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block css %}
+{% endblock %}
+
+{% block index-menu %}active{% endblock %}
+
+{% block title %}{% trans '首页' %} - {% endblock %}
+
+{% block js %}
+{% endblock %}
+
+{% block content %}
+    <section class="row well" >
+        <div class="page-header pull-center">
+            <h1>{{ chapter.name }}
+            <small><a href="/author/{{ book.author.id }}/">{{ book.author.name }}</a> </small></h1>
+            <small>{{ chapter.updateTime|date:"Y-m-d H:i:s" }}</small>
+            </h1>
+        </div>
+        <div class="page-content">
+            <div style="font-size: 25px;line-height: 36px;">
+            {{ chapter.content|safe }}
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="pagination pull-center">
+		<ul class="btn-group">
+        <li>
+            <a class="btn-small" href="/book/{{ book.id }}/index/"><i class="icon-list-alt"></i> {% trans '目录' %}</a>
+        </li>
+		{% if previousChapter %}
+		<li>
+			<a class="btn-small" href="/book/{{ book.id }}/{{ previousChapter.id }}/"><i class="icon-arrow-left"></i> {% trans '上一页' %}</a>
+		 </li>
+		{% endif %}
+		
+		{% if nextChapter %}
+		<li>
+		   <a class="btn-small" href="/book/{{ book.id }}/{{ nextChapter.id }}/"><i class="icon-arrow-right"></i> {% trans '下一页' %}</a>
+		</li>
+		{% endif %}
+		  
+		
+		</ul>
+	</div>
+    </section>
+{% endblock %}
+
+

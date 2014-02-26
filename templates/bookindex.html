@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block css %}
+{% endblock %}
+
+{% block title %}{{ thebook.name }}{% endblock %}
+
+{% block js %}
+{% endblock %}
+
+{% block content %}
+<div class="page-header pull-center">
+<h1>  {{ thebook.name }}  <small> <a href="/author/{{ thebook.author.id }}/">{{ thebook.author }}</a> </small></h1>
+</div>
+<div class="page-content">
+<table class="table table-bordered table-striped">
+<tbody>
+{% for chapterRow in chapterRows %}
+<tr>
+    {% for chapter in chapterRow %}
+    <td width="25%">
+    {% if chapter and chapter.name %}
+    <a href="/book/{{ chapter.book.id }}/{{ chapter.id }}/" >{{ chapter.name }}</a>
+    {% endif %}
+    </td>
+    {% endfor %}
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}
+
+

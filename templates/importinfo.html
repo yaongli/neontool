@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block css %}
+{% endblock %}
+
+{% block index-menu %}active{% endblock %}
+
+{% block title %}{% trans '列表' %} - {% endblock %}
+
+{% block js %}
+{% endblock %}
+
+{% block content %}
+    <div class="well">
+        <table class="table table-bordered">
+            <th>
+                <td>{% trans '来源' %}</td>
+                <td>{% trans '分类' %}</td>
+                <td>{% trans '书名' %}</td>
+                <td>{% trans '更新章节' %}</td>
+                <td>{% trans '更新日期' %}</td>
+                <td>{% trans '操作' %}</td>
+            </th>
+{% for importinfo in importinfolist %}
+            <tr>
+                <td>{{ importinfo.source  }}</td>
+                <td>{{ importinfo.catagory  }}</td>
+                <td>{{ importinfo.bookName  }}</td>
+                <td>{{ importinfo.lastChapter  }}</td>
+                <td>{{ importinfo.updateTime|date:"Y-m-d H:i:s" }}</td>
+                <td><a class="btn" href="/import/importbook/{{ importinfo.id }}/">{% trans '更新' %}</a></td>
+            </tr>
+{% endfor %}
+        </table>
+    </div>
+
+    <div class="pagination pull-right">
+        <ul class="pager">
+        {% if importinfolist.has_previous %}
+        <li>
+            <a class="btn-small" href="/bloglist/{{ importinfolist.previous_page_number }}/">{% trans '上一页' %}</a>
+         </li>importinfolist
+        {% endif %}
+        
+        {% if importinfolist.has_next %}
+        <li>
+            <a class="btn-small" href="/bloglist/{{ importinfolist.next_page_number }}/">{% trans '下一页' %}</a>
+        </li>
+        {% endif %}
+        
+        </ul>
+    </div>
+{% endblock %}
+
+

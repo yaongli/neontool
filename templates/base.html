@@ -1,0 +1,78 @@
+<!DOCTYPE html>{% load i18n %}
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}{% endblock %}{% trans 'NEON' %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/static/css/bootstrap.css" rel="stylesheet">
+        <link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
+        <style>
+            .pull-center{text-align: center;}
+        </style>
+        <!--[if lt IE 9]>
+            <script src="/static/js/html5.js"></script>
+        <![endif]-->
+        {% block css %}{% endblock %}
+        <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
+    </head>
+    <body data-spy="scroll" data-target=".subnav">
+        <!-- Navbar ================================================== -->
+        <div class="header navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                     </a>
+                    <a class="brand" href="/">{% trans 'NEON' %}</a>
+                    <div class="nav-collapse">
+                    <ul class="nav nav-pills">
+                        <li class="cvshistory {% block cvshistory-menu %}{% endblock %}"><a href="/cvshistory">{% trans 'CVS History' %}</a></li>
+                    </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Container ================================================== -->
+        <div class="clear">&nbsp;</div>
+        <div class="clear">&nbsp;</div>
+        <br/><br/><br/>
+        <div class="container" >
+            <div class="row">
+            <div class="span12" >
+            <!-- content ================================================== -->
+            {% block content %}{% endblock %}
+            </div>
+            </div>
+
+            <div class="span12">
+            <!-- footbar ================================================== -->
+            {% block sidebar %}
+            
+            {% endblock %}
+            </div>
+            
+            <!-- Footer ================================================== -->
+            <div class="divider">&nbsp;</div>
+            <div class="clear">&nbsp;</div>
+            <br/><br/><br/>
+            <footer class="footer">
+                <div class="container">
+                    <div class="page-header">
+                    </div>
+                    <div class="row">
+                    <p class="span4 offset2">&copy;  2013</p> 
+                    <p class="span2 offset2 pull-right"><a href="#">Top</a></p>
+                    </div>
+                </div>
+            </footer>
+          
+        </div><!-- /container -->
+        
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="/static/js/bootstrap.js"></script>
+        {% block js %}{% endblock %}
+    </body>
+</html>

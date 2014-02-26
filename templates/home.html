@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block css %}
+{% endblock %}
+
+{% block index-menu %}active{% endblock %}
+
+{% block title %}{% trans '首页' %} - {% endblock %}
+
+{% block js %}
+{% endblock %}
+
+{% block content %}
+<table class="table table-bordered table-striped">
+<thead>
+<tr>
+    <th>分类</th>
+    <th>书名</th>
+    <th>章节</th>
+    <th>作者</th>
+    <th>更新时间</th>
+</tr>
+</thead>
+<tbody>
+{% for history in histories %}
+<tr>
+    <td>[<a href="/catagory/{{ history.book.catagory.id }}/">{{ history.book.catagory }}</a>]</td>
+    <td><a href="/book/{{ history.book.id }}/index"> {{ history.book.name }}</a></td>
+    <td><a href="/book/{{ history.book.id }}/{{ history.chapter.id }}/">{{ history.chapter }}</a></td>
+    <td><a href="/author/{{ history.book.author.id }}/">{{ history.book.author }}</a></td>
+    <td>{{ history.updateTime|date:"Y-m-d H:i:s"  }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
+
+

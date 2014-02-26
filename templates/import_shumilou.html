@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %} - 注册{% endblock %}
+{% block content %}
+<div id="import" class="narrow">
+	<form action="" method="post">
+	  {% csrf_token %}
+	   {{ form.as_table }}
+	   <br/>
+	  <input type="submit" value="提交" tabindex="5"/>
+	</form>
+</div>
+{% endblock %}
+
