@@ -2,7 +2,7 @@
 # coding: utf-8
 from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
-from cvs_history.views import CvsHistoryList
+from cvs_history.views import *
 
 from django.contrib import admin
 admin.autodiscover()
@@ -18,5 +18,6 @@ urlpatterns = patterns('',
 
 urlpatterns = patterns('',
     url(r'^cvs/$', CvsHistoryList.as_view()),
+    url(r'^cvs/([a-z]+)/$', CvsHistoryAuthorList.as_view()),
     url(r'^$', CvsHistoryList.as_view()),
 )
