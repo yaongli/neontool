@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block css %}
+{% endblock %}
+
+{% block index-menu %}active{% endblock %}
+
+{% block title %}{% trans 'Jira History' %} - {% endblock %}
+
+{% block js %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="">
+    {% for jira in jiraList %}
+          <div class="well">
+                <span><a href="https://neoncrm.atlassian.net/browse/{{ jira.id }}" target="_blank">{{ jira.id }}</a></span>
+                <p>Author:{% for author in jira.authors %} {{ author }} {% endfor %} </p>
+                <p>First update: {{ jira.firstUpdate|date:"Y-m-d H:i:s" }}
+                Last update: {{ jira.lastUpdate|date:"Y-m-d H:i:s" }}</p>
+                <p>Files: </p>
+                <div class="well">
+                    {% for file in jira.files %}
+                    {{ file }}<br/>
+                    {% endfor %}
+                </div>
+
+            </tr>
+           </div>
+    {% endfor %}
+    </div>
+{% endblock %}

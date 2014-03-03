@@ -19,5 +19,6 @@ urlpatterns = patterns('',
 urlpatterns = patterns('',
     url(r'^cvs/$', CvsHistoryList.as_view()),
     url(r'^cvs/([a-z]+)/$', CvsHistoryAuthorList.as_view()),
+    url(r'^jira/$', LastTenJiraView.as_view()),
     url(r'^$', CvsHistoryList.as_view()),
 )

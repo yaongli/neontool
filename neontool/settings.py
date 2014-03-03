@@ -56,13 +56,17 @@ WSGI_APPLICATION = 'neontool.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
+#
+# Create a mysql user for neontool
+# create user 'cvs_history'@'localhost' identified by 'cvs_history';
+# GRANT ALL PRIVILEGES ON cvs_history.* TO 'cvs_history'@'localhost';
+#
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'cvs_history',                      # Or path to database file if using sqlite3.
-        'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': 'justdoit',                  # Not used with sqlite3.
+        'USER': 'cvs_history',                      # Not used with sqlite3.
+        'PASSWORD': 'cvs_history',                  # Not used with sqlite3.
         'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
