@@ -23,3 +23,16 @@ class CvsHistory(models.Model):
     def __unicode__(self):
         line = str(self.id) + "\t" + self.file + "\t" + self.author + "\t" + str(self.jira)
         return line
+
+class Engineer(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=384)
+    nick_name = models.CharField(max_length=384 ,null=True, blank=True)
+    cvs_name = models.CharField(max_length=384)
+    email = models.EmailField(null=True, blank=True)
+
+    class Meta:
+        db_table = u'engineer'
+
+    def __unicode__(self):
+        return self.name

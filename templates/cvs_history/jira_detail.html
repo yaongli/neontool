@@ -14,7 +14,6 @@
 
 {% block content %}
     <div class="">
-    {% for jira in jiraList %}
           <div class="well">
                 <span><a href="https://neoncrm.atlassian.net/browse/{{ jira.id }}" target="_blank">{{ jira.id }}</a></span>
                 <p>Author:{% for author in jira.authors %} {{ author }} {% if not forloop.last %} | {% endif %} {% endfor %} </p>
@@ -26,6 +25,5 @@
 
             </tr>
            </div>
-    {% endfor %}
     </div>
 {% endblock %}

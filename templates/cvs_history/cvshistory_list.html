@@ -4,7 +4,7 @@
 {% block css %}
 {% endblock %}
 
-{% block index-menu %}active{% endblock %}
+{% block cvs-menu %}active{% endblock %}
 
 {% block title %}{% trans 'CVS History' %} - {% endblock %}
 
@@ -27,9 +27,15 @@
             <tr>
                 <td noWrap>{{ item.updatetime|date:"Y-m-d H:i:s" }}</td>
                 <td noWrap>{{ item.revision  }}</td>
-                <td noWrap>{{ item.jira  }}</td>
+                <td noWrap><a href="/jira/{{ item.jira|upper  }}" target="_blank">{{ item.jira|upper  }}</a></td>
                 <td noWrap>{{ item.file }}</td>
-                <td noWrap>{{ item.author }}</td>
+                <td noWrap><a href="/cvs/{{ item.author }}" target="_blank">
+                {% for key, value in engineer_map.items %}
+                    {% if item.author == key %}
+                        {{ value }}
+                    {% endif %}
+                {% endfor %}
+                </a></td>
                 <td noWrap>{{ item.comment|safe  }}</td>
             </tr>
     {% endfor %}

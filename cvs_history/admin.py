@@ -5,3 +5,4 @@ from django.contrib import admin
 from cvs_history.models import *
 
 admin.site.register(CvsHistory)
+admin.site.register(Engineer)
