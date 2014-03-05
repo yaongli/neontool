@@ -67,7 +67,7 @@ DATABASES = {
         'NAME': 'cvs_history',                      # Or path to database file if using sqlite3.
         'USER': 'cvs_history',                      # Not used with sqlite3.
         'PASSWORD': 'cvs_history',                  # Not used with sqlite3.
-        'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': '192.168.1.40',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
