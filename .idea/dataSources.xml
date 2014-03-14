@@ -3,7 +3,7 @@
   <component name="DataSourceManagerImpl" format="xml" hash="2159802938">
     <data-source source="LOCAL" name="Django default" uuid="09dc3569-69e3-4ac1-a716-ccc5cf8416b9">
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://127.0.0.1:3306/cvs_history</jdbc-url>
+      <jdbc-url>jdbc:mysql://192.168.1.40:3306/cvs_history</jdbc-url>
       <user-name>cvs_history</user-name>
       <user-password>dfc9dfdcdfd9dff5dfc2dfc3dfd9dfdedfc5dfd8dfd3</user-password>
       <libraries>
