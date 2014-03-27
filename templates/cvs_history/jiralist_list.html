@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load cvs_extras %}
+
+{% block css %}
+{% endblock %}
+
+{% block cvs-menu %}active{% endblock %}
+
+{% block title %}{% trans 'Jira List' %} - {% endblock %}
+
+{% block js %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="">
+        <table class="table table-bordered">
+            <tr>
+                <th>{% trans 'Jira' %}</th>
+                <th>{% trans 'Author' %}</th>
+                <th>{% trans 'First Update' %}</th>
+                <th>{% trans 'Last Update' %}</th>
+                <th>{% trans 'Comment' %}</th>
+            </tr>
+    {% for jira in object_list %}
+            <tr>
+                <td noWrap><a href="/jira/{{ jira.name|upper  }}" target="_blank">{{ jira.name|upper  }}</a></td>
+                <td noWrap> {{ jira.author|cvsauthor:engineer_map }}
+                </td>
+                <td noWrap>{{ jira.first_update|date:"Y-m-d H:i:s" }}</td>
+                <td noWrap>{{ jira.last_update|date:"Y-m-d H:i:s" }}</td>
+                <td noWrap>{{ jira.comment|safe  }}</td>
+            </tr>
+    {% endfor %}
+     </table>
+    </div>
+{% endblock %}

@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load cvs_extras %}
 
 {% block css %}
 {% endblock %}
 
-{% block jira-menu %}active{% endblock %}
+{% block jira10-menu %}active{% endblock %}
 
-{% block title %}{% trans 'Jira' %} - {% endblock %}
+{% block title %}{% trans 'Last 10 Jira' %} - {% endblock %}
 
 {% block js %}
 {% endblock %}
@@ -17,9 +18,9 @@
     {% for jira in jiraList %}
           <div class="well">
                 <span><a href="https://neoncrm.atlassian.net/browse/{{ jira.id }}" target="_blank">{{ jira.id }}</a></span>
-                <p>Author:{% for author in jira.authors %} {{ author }} {% if not forloop.last %} | {% endif %} {% endfor %} </p>
-                <p>First update: {{ jira.firstUpdate|date:"Y-m-d H:i:s" }}
-                Last update: {{ jira.lastUpdate|date:"Y-m-d H:i:s" }}</p>
+                <p>Author: {{ jira.author|cvsauthor:engineer_map }} </p>
+                <p>First update: {{ jira.firstUpdate|date:"Y-m-d H:i:s" }}</p>
+                <p>Last update: {{ jira.lastUpdate|date:"Y-m-d H:i:s" }}</p>
                 <p>Files: </p>
                 <blockquote>{% for file in jira.files %}{{ file }}<br/>{% endfor %}
                 </blockquote>

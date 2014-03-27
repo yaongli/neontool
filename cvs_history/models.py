@@ -36,3 +36,41 @@ class Engineer(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+
+"""
+drop table jira;
+
+CREATE TABLE
+    jira
+    (
+        id INT NOT NULL AUTO_INCREMENT,
+        name VARCHAR(384) NOT NULL,
+        COMMENT VARCHAR(3072) NOT NULL,
+        author VARCHAR(384) NOT NULL,
+        firstUpdate DATETIME,
+        lastUpdate DATETIME,
+        PRIMARY KEY (id)
+    )
+    ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into jira (name, author, comment, firstUpdate, lastUpdate)
+ select jira as name, group_concat(distinct author) as author, comment, min(updateTime) as firstUpdate, max(updateTime) as lastUpdate
+ from cvs_history group by jira order by max(updateTime);
+"""
+
+class Jira(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=384)
+    comment = models.CharField(max_length=3072)
+    author = models.CharField(max_length=384)
+    first_update = models.DateTimeField(null=True, db_column='firstUpdate', blank=True)
+    last_update = models.DateTimeField(null=True, db_column='lastUpdate', blank=True)
+
+    class Meta:
+        db_table = u'jira'
+        ordering = ['-last_update']
+
+    def __unicode__(self):
+        return self.name

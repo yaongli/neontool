@@ -1,12 +1,21 @@
 from django.shortcuts import render
 from django.views.generic import ListView
-from .models import CvsHistory, Engineer
+from .models import CvsHistory, Engineer, Jira
 from django.http import HttpResponse
 from django.views.generic import View
 from django.shortcuts import render_to_response
 
 # Create your views here.
 
+def getEngineerMap():
+    # Add in a QuerySet
+    EngineerList = Engineer.objects.all()
+    EngineerMap = {}
+    for engineer in EngineerList:
+        cvs_name = engineer.cvs_name
+        EngineerMap[cvs_name] = engineer.name
+
+    return EngineerMap
 
 class CvsHistoryList(ListView):
     model = CvsHistory
@@ -18,12 +27,7 @@ class CvsHistoryList(ListView):
         # Call the base implementation first to get a context
         context = super(CvsHistoryList, self).get_context_data(**kwargs)
         # Add in a QuerySet
-        EngineerList = Engineer.objects.all()
-        EngineerMap = {}
-        for engineer in EngineerList:
-            cvs_name = engineer.cvs_name
-            EngineerMap[cvs_name] = engineer.name
-        context['engineer_map'] = EngineerMap
+        context['engineer_map'] = getEngineerMap()
         return context
 
 class CvsHistoryAuthorList(ListView):
@@ -36,46 +40,45 @@ class CvsHistoryAuthorList(ListView):
 class LastTenJiraView(View):
 
     def get(self, request, *args, **kwargs):
-        tempResult =  CvsHistory.objects.raw('select id, jira, updatetime from cvs_history group by jira order by updatetime desc limit 0, 10');
-        EngineerList = Engineer.objects.all()
-        EngineerMap = {}
-        for engineer in EngineerList:
-            cvs_name = engineer.cvs_name
-            EngineerMap[cvs_name] = engineer
+        tempResult = Jira.objects.all()[0:10];
 
         LastTenJiraList = []
         for item in tempResult:
-            jiraId = str(item.jira)
-            Jira = {}
-            Jira['id'] = jiraId.upper()
-            jiraItems =  CvsHistory.objects.filter(jira=jiraId)
-            jiraAuthors = []
+            jiraId = str(item.name)
+            jira = {}
+            jira['id'] = jiraId.upper()
+            jiraItems = CvsHistory.objects.filter(jira=jiraId)
             jiraFiles = []
-            jiraLastUpdate = None
-            jiraFirstUpdate = None
+
             for jiraItem in jiraItems:
-                author = jiraItem.author
-                if EngineerMap.has_key(author):
-                    author =  EngineerMap[author].name
-                if author not in jiraAuthors:
-                    jiraAuthors.append(author)
                 file = jiraItem.file
                 if file not in jiraFiles:
                     jiraFiles.append(file)
-                updateTime = jiraItem.updatetime
-                if jiraLastUpdate == None or jiraLastUpdate < updateTime:
-                    jiraLastUpdate = updateTime
-                if jiraFirstUpdate == None or jiraFirstUpdate > updateTime:
-                    jiraFirstUpdate = updateTime
 
             jiraFiles.sort()
-            Jira['authors'] = jiraAuthors
-            Jira['files'] = jiraFiles
-            Jira['lastUpdate'] = jiraLastUpdate
-            Jira['firstUpdate'] = jiraFirstUpdate
-            LastTenJiraList.append(Jira)
+            jira['author'] = item.author
+            jira['files'] = jiraFiles
+            jira['lastUpdate'] = item.first_update
+            jira['firstUpdate'] = item.last_update
+            LastTenJiraList.append(jira)
 
-        return render_to_response('cvs_history/jira_list.html', {'jiraList': LastTenJiraList})
+        return render_to_response('cvs_history/jira_list.html',
+                                  {'jiraList': LastTenJiraList,
+                                   'engineer_map': getEngineerMap()
+                                  })
+
+class JiraList(ListView):
+    model = Jira
+    template_name = 'cvs_history/jiralist_list.html'
+
+    def get_queryset(self):
+        return Jira.objects.all()[0:100]
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(JiraList, self).get_context_data(**kwargs)
+        context['engineer_map'] = getEngineerMap()
+        return context
 
 class JiraView(View):
     """
