@@ -13,6 +13,10 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="djangolinuxdash" />
+    <orderEntry type="module" module-name="readbook" />
+    <orderEntry type="module" module-name="yblog" />
+    <orderEntry type="module" module-name="bookstore" />
   </component>
   <component name="PyDocumentationSettings">
     <option name="myDocStringFormat" value="Plain" />

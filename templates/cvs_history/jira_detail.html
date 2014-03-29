@@ -21,8 +21,10 @@
                 <p>First update: {{ jira.firstUpdate|date:"Y-m-d H:i:s" }}
                 Last update: {{ jira.lastUpdate|date:"Y-m-d H:i:s" }}</p>
                 <p>Files: </p>
-                <blockquote>{% for file in jira.files %}{{ file }}<br/>{% endfor %}
-                </blockquote>
+<pre class="prettyprint linenums lang-html">
+{% for file in jira.files %}{{ file }} {% if not forloop.last %}
+{% endif %}{% endfor %}
+</pre>
 
             </tr>
            </div>

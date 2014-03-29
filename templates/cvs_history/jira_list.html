@@ -18,15 +18,38 @@
     {% for jira in jiraList %}
           <div class="well">
                 <span><a href="https://neoncrm.atlassian.net/browse/{{ jira.id }}" target="_blank">{{ jira.id }}</a></span>
-                <p>Author: {{ jira.author|cvsauthor:engineer_map }} </p>
+                <div style="width: 130px;"><div style="float: left; display: inline-block;margin-right: 10px">Author: </div>
+                    <div style="display: inline-block">{{ jira.author|cvsauthor:engineer_map }} </div> </div>
+                <div style="clear: both">
                 <p>First update: {{ jira.firstUpdate|date:"Y-m-d H:i:s" }}</p>
                 <p>Last update: {{ jira.lastUpdate|date:"Y-m-d H:i:s" }}</p>
+                </div>
+
                 <p>Files: </p>
-                <blockquote>{% for file in jira.files %}{{ file }}<br/>{% endfor %}
-                </blockquote>
+<pre class="prettyprint linenums lang-html">
+{% for file in jira.files %}{{ file }} {% if not forloop.last %}
+{% endif %}{% endfor %}
+</pre>
 
             </tr>
            </div>
     {% endfor %}
+    </div>
+
+     <div class="pagination pull-right">
+        <ul class="pager">
+        {% if jiraList.has_previous %}
+        <li>
+            <a class="btn-small" href="{{ settings.SITE_PREFIX }}/jira10/p/{{ jiraList.previous_page_number }}/">{% trans 'Previous' %}</a>
+         </li>
+        {% endif %}
+
+        {% if jiraList.has_next %}
+        <li>
+            <a class="btn-small" href="{{ settings.SITE_PREFIX }}/jira10/p/{{ jiraList.next_page_number }}/">{% trans 'Next' %}</a>
+        </li>
+        {% endif %}
+
+        </ul>
     </div>
 {% endblock %}

@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../bookstore/.idea/bookstore.iml" filepath="$PROJECT_DIR$/../bookstore/.idea/bookstore.iml" />
+      <module fileurl="file://D:/github/djangolinuxdash/.idea/djangolinuxdash.iml" filepath="D:/github/djangolinuxdash/.idea/djangolinuxdash.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/neontool.iml" filepath="$PROJECT_DIR$/.idea/neontool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../readbook/.idea/readbook.iml" filepath="$PROJECT_DIR$/../readbook/.idea/readbook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../yblog/.idea/yblog.iml" filepath="$PROJECT_DIR$/../yblog/.idea/yblog.iml" />
     </modules>
   </component>
 </project>

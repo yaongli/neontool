@@ -1,0 +1,27 @@
+<div class="pagination pull-left">
+	<div>
+		{% ifnotequal object_list.paginator.num_pages 1 %}
+		<ul>
+            {% if page_obj.has_previous %}
+		        <li><a id="first" href="{{ settings.SITE_PREFIX }}{{ page_url }}?page=1" title="First"><i class="fa fa-fast-backward"></i></a></li>
+				<li><a id="previous" href="{{ settings.SITE_PREFIX }}{{ page_url }}?page={{ page_obj.previous_page_number  }}"  title="Previous"><i class="fa fa-backward"></i></a></li>
+                <li><a>...</a></li>
+			{% endif %}
+
+			{% for i in show_page_range %}
+				{% ifequal i page_obj.number %}
+					<li class="active" ><a class="active">{{i}}</a></li>
+				{% else %}
+					<li><a id="num{{i}}" href="{{ settings.SITE_PREFIX }}{{ page_url }}?page={{ i }}">{{i}}</a></li>
+				{% endifequal %}
+			{% endfor %}
+
+			{% if page_obj.has_next %}
+                <li><a>...</a></li>
+				<li><a id="next" href="{{ settings.SITE_PREFIX }}{{ page_url }}?page={{ page_obj.next_page_number  }}" title="Next"><i class="fa fa-forward"></i></a></li>
+                <li><a id="last" href="{{ settings.SITE_PREFIX }}{{ page_url }}?page=last" title="Last"><i class="fa fa-fast-forward"></i></a></li>
+			{% endif %}
+		</ul>
+		{% endifnotequal %}
+	</div>
+</div>

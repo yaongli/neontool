@@ -13,6 +13,17 @@
 
 
 {% block content %}
+    <header class="jumbotron subhead" id="overview">
+        <div class="container">
+        <h1>Neon CVS History List</h1>
+            <p class="lead">CVS history list: click the JIRA link can get the change list of the JIRA.</p>
+        </div>
+    </header>
+
+    {% with page_url="/cvs/" %}
+        {% include "cvs_history/include_pagination.html" %}
+    {% endwith %}
+
     <div class="">
         <table class="table table-bordered">
             <tr>
@@ -41,4 +52,11 @@
     {% endfor %}
      </table>
     </div>
+
+    {% with page_url="/cvs/" %}
+        {% include "cvs_history/include_pagination.html" %}
+    {% endwith %}
+
+</div>
+
 {% endblock %}
